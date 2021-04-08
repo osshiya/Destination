@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Forum</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+crossorigin="anonymous">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Bubbler One' rel='stylesheet'>
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<style>
+  th, tr{
+    border-color: rgba(248, 246, 246, 0.63);
+    border: solid,rgb(241, 236, 236);
+    line-height: 50px;
+    text-align: center;
+  }
+
+table{
+  border-collapse:separate;
+  border-spacing:0 5px;
+  border-radius: 15%;
+  font-size: medium;
+}
+
+  td{
+    text-align: center;
+  }
+
+  nav{
+    height: 60px;
+    background-color: rgba(33, 84, 151, 0.829)!important;
+  }
+
+  .view{
+    border-radius: 20%;
+    background-color: dodgerblue;
+  }
+
+  body, h1, h2, h3, h4, h5, h6, p, a, i, label, input, button, small{
+font-family: Bubbler One;
+font-weight: 900;
+font-size:x-large;
+color: rgb(229, 230, 221);
+}
+
+.btn{
+color: rgb(229, 230, 221)!important;
+}
+
+.btn:hover{
+    background-color: rgb(32, 117, 173)!important;
+  }
+
+</style>
+
+</head>
+
+<header>
+<nav class="navbar navbar-expand-md navbar-dark">
+<a class="navbar-brand" href="index.html"><img src="images/destination-app-logo.png" style="width: 40px;"></a>
+<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="forum_one.html">Search for a new Journey</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="forum_form.html">Create a new Journey</a>
+      </li>
+      </ul>
+      <ul class="navbar-nav mr-sm-2">
+        <li class="nav-item">
+          <a class="nav-link" href="forum.html" target="_blank">Chat</a>
+        </li>
+    </ul>
+</div>
+</nav>
+</header>
+
+<body style="width:100%; background-image: url(images/bright.gif); background-size: cover;">
+
+<section class="container-fluid" style="padding: 30px;">
+<table id="posts-table posts-tableB" style="padding: 50px!important; width: 100%!important;">
+    <tbody id="posts-bodyB">
+    </tbody>
+    <tfoot id="posts-footB">
+    </tfoot>
+</table>
+
+<div class="container" style="background-color: rgba(64, 165, 224, 0.459); width: 50%; border-radius: 5%;">
+    <form id="posts2-form2" style="align-content: center; padding: 20px;">
+      <div class="form-group">
+        <label for="user-topic2">Topic</label>
+        <input type="text" class="form-control" id="user-topic2" placeholder="Topic" required>
+        
+      </div>
+
+      <div class="form-group">
+        <label for="user-msg2">Message</label>
+        <textarea class="form-control" id="user-msg2" rows="3" aria-describedby="help" ></textarea>
+        <small id="help" class="form-text text-muted" >Do not be rude!</small>
+      </div>
+      <button type="submit" class="subb btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+    </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+crossorigin="anonymous"></script>
+
+<script src="Fscript.js"></script>
+
+
+<script>
+
+
+$(document).ready(function () {
+
+var apiKey = "5e43f919e9571b29c13c8976";
+var myDB = "syyyy-726a";
+var myCollection = "forum";
+var idN = window.sessionStorage.getItem("idE");
+//create listener for submit
+var posts = {
+    name: "",
+    topic: "",
+    msg: ""
+}
+
+$("#posts2-form2").submit(function (e) {
+console.log("submitting form details");
+event.preventDefault();
+
+//retrieve form values
+posts.name = window.sessionStorage.getItem("nname");
+posts.topic = $("#user-topic2").val();
+posts.msg = $("#user-msg2").val();
+
+//set contact format json data
+let postsDocument = {
+  name: posts.name,
+  topic: posts.topic,
+  msg: posts.msg,
+  
+};
+
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://"+ myDB +".restdb.io/rest/" + myCollection  + "/" + idN + "/text",
+  "method": "POST",
+  "headers": {
+    "content-type": "application/json",
+    "x-apikey": apiKey,
+    "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": JSON.stringify(postsDocument)
+}
+
+$.ajax(settings).done(function (response) {
+console.log(response);
+});
+
+});
+
+
+function listPosts(){
+console.log("start of listing contacts");
+
+
+var settings = {
+"async": true,
+"crossDomain": true,
+"url": "https://"+ myDB +".restdb.io/rest/" + myCollection  + "/" + idN + "/text",
+"method": "GET",
+"headers": {
+  "content-type": "application/json",
+  "x-apikey": apiKey,
+  "cache-control": "no-cache"
+}
+}
+
+$.ajax(settings).done(function (data) {
+console.log("successfully log into db");
+console.log(data);
+
+//do a jquery loop of json objects based on their keys(indexes)
+console.log("total posts" + data.length);
+
+
+$.each(data, function(key, value){
+console.log(key + "value");
+console.log("Name" + data[key].name);
+console.log("Topic" + data[key].topic);
+console.log("Message" + data[key].msg);
+var postsDocument = {
+      name: data[key].name,
+      topic: data[key].topic,
+      msg: data[key].msg,
+      id: data[key]._id
+  }
+
+  
+  $("#posts-footB").prepend( `<tr style="background-color: rgba(33, 86, 109, 0.733)!important;"><td style="padding: 50px 0 50px 0!important;">${postsDocument.name}</td><td>${postsDocument.topic}</td><td>${postsDocument.msg}</td>
+  `);
+});//end each loop
+  
+});
+
+}//end listContacts
+
+listPosts();
+
+}); //end doc ready
+
+</script>
+</body>
+</html>

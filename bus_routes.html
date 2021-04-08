@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+    <title>Destination - Bus Routes</title>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Lemonada&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="animate.css">
+    <link rel="stylesheet" type="text/css" href="hover.css">
+    <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Script for map -->
+    <script type="text/javascript" src="https://gothere.sg/jsapi?sensor=false"> </script>
+    <script type="text/javascript" src="mapScript.js"> </script>
+    
+
+    <style type="text/css">
+body, p, h1, h2, h3, h4, h5 ,button, input, a, label, select, .but{
+    font-family: 'Lemonada', cursive;
+}
+        #_gdir{font-size:14px;}
+        #_gdir > div{font-weight:bold;text-align:center;}
+        #_gdir p._sum{text-align:center;font-weight:bold;color:#3a741f;}
+        #_gdir ol{padding:10px 30px 10px 40px;}
+        #_gdir ol li{border-bottom:1px solid #ccc;}
+        #_gdir ol li div p.r{font-size:11px;color:#3a741f;text-align:right;}
+        #_gdir div._copy{font-size:12px;font-weight:normal;}
+    
+        .banner {display:none}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0}
+
+.head {
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+            display: block;
+            height: auto;
+            }
+
+.shadowfilter {
+	-webkit-filter: drop-shadow(0px 0px 8px rgba(194, 249, 255, 0.8));
+	-webkit-transition: all 0.5s linear;
+	-o-transition: all 0.5s linear;
+	transition: all 0.5s linear;	
+}
+.shadowfilter:hover {
+	-webkit-filter: drop-shadow(0px 0px 12px rgba(0, 231, 255, 0.8));
+}
+
+.bgshadow{
+    -webkit-filter: drop-shadow(0px 12px 0px rgba(65, 65, 65, 0.8));
+}
+
+ .nav-link{
+border-color: rgb(81, 148, 175)!important;
+border-width: 5px!important;
+border-left-style: solid;
+margin: 20px!important;
+color: rgb(241, 243, 243)!important;
+}
+
+.nav-link:hover{
+border-color: rgb(196, 230, 243)!important;
+color: rgb(188, 223, 214)!important;
+}
+
+.nav-link:active{
+    border-color: rgb(237, 255, 137)!important;
+color: rgb(209, 223, 228)!important;
+}
+
+.active{
+    border-color: rgb(237, 255, 137)!important;
+color: rgb(239, 252, 191)!important;
+}
+
+.arr{
+    color: rgb(225, 239, 245);
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 30px;
+    border-radius: 20px;
+}
+
+.arr:hover{
+    color: skyblue;
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 30px;
+    border-radius: 20px;
+    background-color: rgba(70, 131, 180, 0.301);
+}
+
+.toSection{
+    color: rgb(72, 109, 131);
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 20px;
+    border-radius: 20px;
+}
+
+.toSection:hover{
+    color: rgb(239, 250, 255);
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 20px;
+    border-radius: 20px;
+    background-color: rgba(104, 159, 204, 0.301);
+}
+
+.text-focus-in {
+	-webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.card-body{
+color: rgb(227, 236, 243);
+background-color: rgba(57, 97, 116, 0.349);
+}
+
+.card-body h4 ,.card-body p{
+    padding: 30px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.but {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	background-color:#f9f9f9;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.but:hover {
+	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+	background-color:#e9e9e9;
+}
+.but:active {
+	position:relative;
+	top:1px;
+}
+
+.text-flicker-in-glow {
+	-webkit-animation: text-flicker-in-glow 4s linear both;
+	        animation: text-flicker-in-glow 4s linear both;
+}
+    </style>
+</head>
+
+<body style="background-image: url(images/bg_sky.gif); background-position: center; background-size:cover;">
+
+<header style="width:100%;">
+        <nav class="nav navbar navbar-expand-md navbar-dark" style="background-color: rgba(14, 37, 46, 0.418)!important; height: 60px; z-index: 30;">
+            <a class="nav-pop navbar-brand" style="color: white; font-size: x-large; padding: 0 30px 0 10px; width: 200px;" href="index.html"><img src="images/destination-logo.png" style="width: 10%;">Destination</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"   style="background-color: rgba(14, 37, 46, 0.24)!important;">
+                        <a class="nav-link active text-flicker-in-glow" href="bus_routes.html">Bus is stopping!<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+</header>
+
+<section class="container-fluid" style="width: 100%; background-color: rgba(146, 192, 223, 0.267); padding: 20px;">
+ <div id="map" style="width:50%;height:600px;padding:50px;float:left;"></div>
+   
+ <div class="container" style="padding: 20px; width: 50%; float: right;">
+    <h3 style="color: rgb(52, 175, 216);">Bus No: </h3><form onsubmit="routeSearch()">
+        <input type="text" class="form-control" name="bus" id="buscode" aria-describedby="helpId" placeholder="10"><br>
+        <button id="submit" onclick="routeSearch()" class="but btn btn-primary">Search Routes</button>
+   </form>
+<hr>
+    <h3 style="color: rgb(52, 175, 216);">Bus Stop Code: </h3><form onsubmit="stopSearch()">
+        <input type="text" class="form-control" name="route" id="routecode" aria-describedby="helpId" placeholder="01219"><br>
+        <button id="submit" onclick="stopSearch()" class="but btn btn-primary">Search Bus Stops</button>
+   </form>
+<hr>
+    <h3 style="color: rgb(52, 175, 216);">Address: </h3><form action="#" onsubmit="getAddress(this.address.value);return false;">
+        <input type="text" class="form-control" name="address" size="64" placeholder="Ngee Ann Polytechnic"/><br>
+        <input type="submit" class="but" value="Find Location"/>
+    </form>
+<hr>
+<br>
+<input type="button" class="but" value="Restart" onClick="window.location.reload()">
+</div>
+
+<div class="container" style="background-color: rgba(194, 189, 189, 0.315);text-align: center;">
+    <table id="busRoutes"></table> 
+</div>
+</section>
+
+
+<script type="text/javascript">
+
+//Load map
+gothere.load("maps");
+var directions, map, geocoder;
+
+//Initialize map
+function initialize() {
+    if (GBrowserIsCompatible()) {
+
+    // Create the Gothere map object.
+    map = new GMap2(document.getElementById("map"));
+
+    // Set the center of the map.
+    map.setCenter(new GLatLng(1.362083, 103.819836), 11);
+    // Add zoom controls on the top left of the map.
+    map.addControl(new GSmallMapControl());
+    // Add a scale bar at the bottom left of the map.
+    map.addControl(new GScaleControl());
+    //Create a geocoder object.
+    geocoder = new GClientGeocoder();
+
+    }
+}
+
+
+
+    //@paramssettings
+    var params = [
+"$skip=0",
+"$skip=500",
+"$skip=1000",
+"$skip=1500",
+"$skip=2000",
+"$skip=2500",
+"$skip=3000",
+"$skip=3500",
+"$skip=4000",
+"$skip=4500",
+"$skip=5000",
+"$skip=5500",
+"$skip=6000",
+"$skip=6500",
+"$skip=7000",
+"$skip=7500",
+"$skip=8000",
+"$skip=8500",
+"$skip=9000",
+"$skip=9500",
+"$skip=10000",
+
+"$skip=10500",
+"$skip=11000",
+"$skip=11500",
+"$skip=12000",
+"$skip=12500",
+"$skip=13000",
+"$skip=13500",
+"$skip=14000",
+"$skip=14500",
+"$skip=15000",
+"$skip=15500",
+"$skip=16000",
+"$skip=16500",
+"$skip=17000",
+"$skip=17500",
+"$skip=18000",
+"$skip=18500",
+"$skip=19000",
+"$skip=19500",
+"$skip=20000",
+
+"$skip=20500",
+"$skip=21000",
+"$skip=21500",
+"$skip=22000",
+"$skip=22500",
+"$skip=23000",
+"$skip=23500",
+"$skip=24000",
+"$skip=24500",
+"$skip=25000",
+"$skip=25500",
+"$skip=26000",
+    ]
+
+    var BSparams = [
+"$skip=0",
+"$skip=500",
+"$skip=1000",
+"$skip=1500",
+"$skip=2000",
+"$skip=2500",
+"$skip=3000",
+"$skip=3500",
+"$skip=4000",
+"$skip=4500",
+"$skip=5000",
+"$skip=5500",
+"$skip=6000",
+]
+        //Search for Bus Route
+        // //YYYY-MM-DD[T]HH:mm:ss(SGT)
+    function routeSearch(){
+        event.preventDefault();
+        for (var i=0; i < params.length; i++){
+            var paramsArr;
+            paramsArr = params[i];
+        
+        //Call API
+    $.ajax({
+    type: "GET",
+    dataType: 'json',
+    contentType: "text/plain",
+    
+    url: "https://cors-anywhere.herokuapp.com/http://datamall2.mytransport.sg/ltaodataservice/BusRoutes?" + paramsArr,
+    
+    headers: { 'AccountKey' : 'jYPJun3ORe2iZ18XLuN2zw==',
+        'accept' : 'application/json'}, 
+              
+        data: {}, 
+   
+    // crossDomain: true,
+    //@data returning JSON data
+    success: function(data) {   
+
+        var reading = data.value;
+
+// for every Array inside
+        for (var i=0; i < reading.length; i++){
+        if (reading[i].ServiceNo === document.getElementById("buscode").value){
+    var busNo = [];
+    var seq = [];
+    var bsCode = [];
+    var wdFB = [];
+    var wdLB = [];
+    var satFB = [];
+    var satLB = [];
+    var sunFB = [];
+    var sunLB = [];
+    busNo += reading[i].ServiceNo;
+    seq += reading[i].StopSequence;
+    bsCode += reading[i].BusStopCode;
+    wdFB += reading[i].WD_FirstBus;
+    wdLB += reading[i].WD_LastBus;
+    satFB += reading[i].SAT_FirstBus;
+    satLB += reading[i].SAT_LastBus;
+    sunFB += reading[i].SUN_FirstBus;
+    sunLB += reading[i].SUN_LastBus;
+
+//Print format
+    var eachRoute = "<tr>" + "<th>" + "Bus No: "  + busNo + "</th>" +  "</tr>" 
+                            + "<tr>" + "<td>" + "Stop Sequence: "  + seq + "</td>" + "</tr>"
+                            + "<tr>" + "<td>" + "Bus Stop Code: " + bsCode + "</td>" + "</tr>" 
+                            
+                            + "<tr>" + "<td>" + wdFB + "</td>"
+                            + "<td>" + wdLB + "</td>" + "</tr>"
+
+                            + "<tr>" + "<td>" + satFB + "</td>"
+                            + "<td>" + satLB + "</td>" + "</tr>"
+
+                            + "<tr>" + "<td>" + sunFB + "</td>"
+                            + "<td>" + sunLB + "</td>" + "</tr>"
+                            //Prints out
+            document.getElementById("busRoutes").innerHTML += eachRoute;
+            }
+        }
+
+        }
+
+    })
+        }
+    }
+
+// Search for Bus Stops
+function stopSearch(){
+    event.preventDefault();
+for (var i=0; i < BSparams.length; i++){
+            var BSparamsArr;
+            BSparamsArr = BSparams[i];
+
+//Call API
+        $.ajax({
+    type: "GET",
+    dataType: 'json',
+    contentType: "text/plain",
+    url: "https://cors-anywhere.herokuapp.com/http://datamall2.mytransport.sg/ltaodataservice/BusStops?" + BSparamsArr, 
+    headers: { 'AccountKey' : 'jYPJun3ORe2iZ18XLuN2zw==',
+        'accept' : 'application/json'}, 
+
+        Rdata: {},
+    // crossDomain: true,
+    //@data returning JSON data
+    success: function(Rdata) {
+        var Rreading = Rdata.value;
+    
+        for (var i=0; i < Rreading.length; i++){
+            if (Rreading[i].BusStopCode === document.getElementById("routecode").value){
+    var lat = [];
+    var long = [];
+    var road = [];
+    var desc = [];
+    lat += Rreading[i].Latitude;
+    long += Rreading[i].Longitude;
+    road += Rreading[i].RoadName;
+    desc += Rreading[i].Description;
+        
+        
+    // Create a map.
+    var selected = new GLatLng(lat, long);
+
+    // Create a new base icon for our custom markers.
+    var baseIcon = new GIcon();
+            	baseIcon.image = "http://www.google.com/mapfiles/markerA.png";
+            	baseIcon.shadow = "http://www.google.com/mapfiles/shadow50.png";
+            	baseIcon.iconSize = new GSize(20, 34);
+                baseIcon.shadowSize = new GSize(37, 34);
+                baseIcon.iconAnchor = new GPoint(9, 34);
+                baseIcon.infoWindowAnchor = new GPoint(5, 29);
+    var customIcon = new GIcon(baseIcon);
+    customIcon.image = "http://www.google.com/mapfiles/marker" + ".png";
+
+    // Create a marker.
+    var BSmarker = new GMarker(selected, {icon:customIcon});
+
+    var text = "<p>" + road + "</p>" + "<br>" 
+                    + "<p>" + desc + "</p>"
+
+    // Add the marker to the map.
+    map.addOverlay(BSmarker);
+    // Open an info window on the marker.
+    BSmarker.bindInfoWindowHtml(text);
+            }
+        }
+    }
+
+    
+})
+}
+
+//2nd para
+for (var i=0; i < params.length; i++){
+            var paramsArr;
+            paramsArr = params[i];
+        
+    $.ajax({
+    type: "GET",
+    dataType: 'json',
+    contentType: "text/plain",
+    
+    url: "https://cors-anywhere.herokuapp.com/http://datamall2.mytransport.sg/ltaodataservice/BusRoutes?" + paramsArr,
+    
+    headers: { 'AccountKey' : 'jYPJun3ORe2iZ18XLuN2zw==',
+        'accept' : 'application/json'}, 
+              
+        data: {}, 
+   
+    // crossDomain: true,
+    //@data returning JSON data
+    success: function(data) {   
+
+        var reading = data.value;
+
+        for (var i=0; i < reading.length; i++){
+        if (reading[i].BusStopCode === document.getElementById("routecode").value){
+    var rbusNo = [];
+    var rseq = [];
+    var rbsCode = [];
+    var rwdFB = [];
+    var rwdLB = [];
+    var rsatFB = [];
+    var rsatLB = [];
+    var rsunFB = [];
+    var rsunLB = [];
+    rbusNo += reading[i].ServiceNo;
+    rseq += reading[i].StopSequence;
+    rbsCode += reading[i].BusStopCode;
+    rwdFB += reading[i].WD_FirstBus;
+    rwdLB += reading[i].WD_LastBus;
+    rsatFB += reading[i].SAT_FirstBus;
+    rsatLB += reading[i].SAT_LastBus;
+    rsunFB += reading[i].SUN_FirstBus;
+    rsunLB += reading[i].SUN_LastBus;
+
+    var reachRoute = "<tr>" + "<th>" + "Bus No: "  + rbusNo + "</th>" +  "</tr>" 
+                            + "<tr>" + "<td>" + "Stop Sequence: "  + rseq + "</td>" + "</tr>"
+                            + "<tr>" + "<td>" + "Bus Stop Code: " + rbsCode + "</td>" + "</tr>" 
+                            
+                            + "<tr>" + "<td>" + rwdFB + "</td>"
+                            + "<td>" + rwdLB + "</td>" + "</tr>"
+
+                            + "<tr>" + "<td>" + rsatFB + "</td>"
+                            + "<td>" + rsatLB + "</td>" + "</tr>"
+
+                            + "<tr>" + "<td>" + rsunFB + "</td>"
+                            + "<td>" + rsunLB + "</td>" + "</tr>"
+            document.getElementById("busRoutes").innerHTML += reachRoute;
+            
+
+}
+        }
+    }
+})
+}
+}
+
+
+gothere.setOnLoadCallback(initialize);
+
+//Geocoder
+function getAddress(address) {
+            if (geocoder) {
+                geocoder.getLatLng(address, function(latlng) {
+                    if (!latlng) {
+                        alert("Opps, " + address + " not found.");
+                    } else {
+                        // Center the map at the address and draw a marker.
+                        map.setCenter(latlng, 14);
+                        var imarker = new GMarker(latlng);
+                        map.addOverlay(imarker);
+                        imarker.openInfoWindowHtml("<h3>" + address + "</h3>");
+                    }
+                });
+            }
+    }
+
+</script>
+</body>
+</html>

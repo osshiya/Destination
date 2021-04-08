@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
+    <title>Destination - Where are you going?</title>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Lemonada&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="animate.css">
+    <link rel="stylesheet" type="text/css" href="hover.css">
+    <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Map JS -->
+    <script type="text/javascript" src="https://gothere.sg/jsapi?sensor=false"> </script>
+    <script type="text/javascript" src="mapScript.js"> </script>
+    
+    
+
+    <style type="text/css">
+body, p, h1, h2, h3, h4, h5 ,button, input, a, label, select, .but{
+    font-family: 'Lemonada', cursive;
+}
+        #_gdir{font-size:14px;}
+        #_gdir > div{font-weight:bold;text-align:center;}
+        #_gdir p._sum{text-align:center;font-weight:bold;color:#3a741f;}
+        #_gdir ol{padding:10px 30px 10px 40px;}
+        #_gdir ol li{border-bottom:1px solid #ccc;}
+        #_gdir ol li div p.r{font-size:11px;color:#3a741f;text-align:right;}
+        #_gdir div._copy{font-size:12px;font-weight:normal;}
+    
+        .banner {display:none}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0}
+
+.head {
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+            display: block;
+            height: auto;
+            }
+
+.shadowfilter {
+	-webkit-filter: drop-shadow(0px 0px 8px rgba(194, 249, 255, 0.8));
+	-webkit-transition: all 0.5s linear;
+	-o-transition: all 0.5s linear;
+	transition: all 0.5s linear;	
+}
+.shadowfilter:hover {
+	-webkit-filter: drop-shadow(0px 0px 12px rgba(0, 231, 255, 0.8));
+}
+
+.bgshadow{
+    -webkit-filter: drop-shadow(0px 12px 0px rgba(65, 65, 65, 0.8));
+}
+
+ .nav-link{
+border-color: rgb(81, 148, 175)!important;
+border-width: 5px!important;
+border-left-style: solid;
+margin: 20px!important;
+color: rgb(241, 243, 243)!important;
+}
+
+.nav-link:hover{
+border-color: rgb(196, 230, 243)!important;
+color: rgb(188, 223, 214)!important;
+}
+
+.nav-link:active{
+    border-color: rgb(237, 255, 137)!important;
+color: rgb(209, 223, 228)!important;
+}
+
+.active{
+    border-color: rgb(237, 255, 137)!important;
+color: rgb(239, 252, 191)!important;
+}
+
+.arr{
+    color: rgb(225, 239, 245);
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 30px;
+    border-radius: 20px;
+}
+
+.arr:hover{
+    color: skyblue;
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 30px;
+    border-radius: 20px;
+    background-color: rgba(70, 131, 180, 0.301);
+}
+
+.toSection{
+    color: rgb(72, 109, 131);
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 20px;
+    border-radius: 20px;
+}
+
+.toSection:hover{
+    color: rgb(239, 250, 255);
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 20px;
+    border-radius: 20px;
+    background-color: rgba(104, 159, 204, 0.301);
+}
+
+.text-focus-in {
+	-webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.card-body{
+color: rgb(227, 236, 243);
+background-color: rgba(57, 97, 116, 0.349);
+}
+
+.card-body h4 ,.card-body p{
+    padding: 30px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.but {
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	background-color:#f9f9f9;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+.but:hover {
+	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+	background-color:#e9e9e9;
+}
+.but:active {
+	position:relative;
+	top:1px;
+}
+
+/* Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+/* Global */
+body{
+  height: calc(100vh - 8em);
+  padding: 2em;
+  color: rgba(255,255,255,.75);
+  font-family: 'Anonymous Pro', monospace;  
+  background-color: rgb(25,25,25);  
+}
+.line-1{
+    position: relative;
+    top: 50%;  
+    width: 24em;
+    margin: 0 auto;
+    border-right: 2px solid rgba(255,255,255,.75);
+    font-size: 180%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);    
+}
+
+/* Animation */
+.anim-typewriter{
+  animation: typewriter 4s steps(44) 1s 1 normal both,
+             blinkTextCursor 500ms steps(44) infinite normal;
+}
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 24em;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
+}
+    </style>
+</head>
+
+<body style="background-image: url(images/bg.gif); background-position: center; background-size: cover;">
+
+    <header style="width:100%;">
+        <nav class="nav navbar navbar-expand-md navbar-dark" style="background-color: rgba(14, 37, 46, 0.418)!important; height: 60px; z-index: 5!important;">
+            <a class="nav-pop navbar-brand" style="color: white; font-size: x-large; width: 200px;" href="index.html"><img src="images/destination-logo.png" style="width: 10%;">Destination</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"   style="background-color: rgba(14, 37, 46, 0.24)!important;">
+                        <a class="nav-link" href="map_form.html">Where are you going to?
+                            </a>
+                        </li>
+                    <li class="nav-item"   style="background-color: rgba(14, 37, 46, 0.24)!important;">
+                        <a class="nav-link" href="map_method.html">How are you going there?</a>
+                    </li>
+                    <li class="nav-item"   style="background-color: rgba(14, 37, 46, 0.24)!important;">
+                        <a class="nav-link active" href="map.html">You have arrived!<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+</header>
+
+<section style="width: 100%; background-color: rgba(122, 120, 120, 0.267); padding: 10px;">
+<div class="container-fluid">
+<div id="map" style="width:60%;height:700px;margin-right:10px;float:left; position: relative;z-index: -1!important;">
+</div>
+
+    <div id="sidebar" class="container" style="color: white;width:30%; padding: 10px;float:left;">
+        <h3>Search Locations</h3>
+        <form id="nav" action="#" onsubmit="getDirections(this.from.value, this.to.value, this.mode.value);return false;">
+            <label style="width:50px;display:inline-block;">From:</label><input type="text"style="width:150px" size="20" id="fromMap" class="form-control" name="from">
+            <label style="width:50px;display:inline-block;">To:</label><input type="text"style="width:150px"  size="20" id="toMap" class="form-control" name="to">
+            <label style="width:50px;display:inline-block;">Via:</label>
+            
+                <select id="modeMap" class="form-control" style="width:150px" name="mode">
+                    <option value=""></option>
+                    <option value="pt">Public Transport</option>
+                    <option value="pt_b">Bus</option>
+                    <option value="pt_t">Train</option>
+                    <option value="t">Taxi</option>
+                    <option value="c">Car</option>
+                </select><br>
+                <input type="submit" class="but" value="Find Place">
+        </form>
+<hr>
+        <form action="#" onsubmit="getAmenities(this.query.value, this.category.value);return false;">
+                <h3>Search Amenities</h3>
+                <label style="width:70px;display:inline-block;">Address:</label>
+                <input type="text" style="width:150px" class="form-control" size="20" name="query" placeholder="Ngee Ann City"/>
+                <label style="width:70px;display:inline-block;">Category:</label>
+                
+                <select id="selectionA" name="category" style="width:150px" class="form-control">
+                    <option value=""></option>
+                    <option value="supermarkets">Supermarkets</option>
+                    <option value="clinics">Clinics</option>
+                    <option value="postoffices">Post offices</option>
+                    <option value="schools">Schools</option>
+                    <option value="atms">ATMs</option>
+                    <option value="banks">Banks</option>
+                    <option value="petrolkiosks">Petrol Kiosks</option>
+                    <option value="busstops">Bus Stops</option>
+                    <option value="railstations">Rail Stations</option>
+                </select><br>
+                <input type="submit" class="but" value="Find Amenities">
+        </form>
+    </div>
+</div>
+    <div class="container-fluid" style="align-items: center;">
+        <div id="panel" class="container" style="position: relative!important;float: right;color: rgb(64, 200, 224) ;height: 100%;min-width:40%; margin: 30px;"></div>
+    </div>
+    </section>
+
+</body>
+</html>

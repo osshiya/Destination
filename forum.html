@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>List Contacts form Mongodb</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="dashboard.css">
+    <link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Bubbler One' rel='stylesheet'>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+    body {
+        font-family: 'Advent Pro';font-size: 22px;
+        background-image: url("images/bg_.gif");
+      
+
+    }
+        #msg{
+            margin: 25px;
+            padding: 25px;
+            background-color: rgb(122, 184, 219);
+            border-radius: 20px;
+        }
+        #contact-form{
+            margin: 25px;
+            padding: 25px;
+            background-color: rgb(219, 101, 71);
+            border-radius: 20px;
+
+        }
+        header{
+            font-family: 'Bubbler One';
+            font-size: 50px;
+            display: block;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+      Welcome to the live chat! Interact with the other users of Destination!
+    </header>
+    
+
+   
+
+
+                <div class="table-responsive">
+                    <table id="contacts-table" class="table table-striped">
+                        <!--<thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Msg</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>-->
+                        <tbody id="contacts-body">
+            
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="container" id=msg-board>
+                    
+                    <form id="contact-form">
+                      <div class="form-group">
+                        <label for="user-name">Username</label>
+                        <input type="text" class="form-control" id="user-name" placeholder="Name" required>
+                      </div>
+
+                
+                      <div class="form-group">
+                        <label for="user-question"></label>
+                        <textarea class="form-control" id="user-question" placeholder="Join the conversation!" rows="3"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+        crossorigin="anonymous"></script>
+    <script>
+ $(document).ready(function () {
+
+
+            var apiKey = "5e284c034327326cf1c91aba";
+            var myDB = "destination-298c";
+            var myCollection = "destination";
+
+            $(document).on("click",".delete", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                console.log("click event");
+                var id = $(this).data("id");
+                console.log("id... " + id);
+                deleteContact(id);
+            });
+            
+      //create listener for submit
+      var contact = {
+        ans: "",
+
+      }
+
+      $("#submit-btn").on("click",function (event) {
+        console.log("submitting form details");
+        event.preventDefault();
+        event.stopPropagation();
+        listAns();
+
+        //retrieve form values
+        contact.ans = $("#answer").val();
+
+
+        //set contact format json data
+        let contactDocument = {
+          ans: contact.ans,
+  
+        };
+        
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "https://"+ myDB +".restdb.io/rest/" + myCollection +"",
+          "method": "POST",
+          "headers": {
+            "content-type": "application/json",
+            "x-apikey": apiKey,
+            "cache-control": "no-cache"
+          },
+          "processData": false,
+          "data": JSON.stringify(contactDocument)
+        }
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+       
+      
+      });
+
+
+      function deleteContact(id){
+                var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://"+ myDB +".restdb.io/rest/" + myCollection + "/" + id,
+                "method": "DELETE",
+                "headers": {
+                    "content-type": "application/json",
+                    "x-apikey": apiKey,
+                    "cache-control": "no-cache"
+                }
+                }
+
+                $.ajax(settings).done(function (response) {
+                    console.log("delete entry:" + id); 
+                        //animate before removing from DOM
+                        //tap on data id 
+                        $('tr[data-row="' + id +'"]').fadeOut(300, function(){ $(this).remove();});
+                });
+
+            }
+                var i = 0
+                $("#like-btn").on("click", function(event){
+
+                    i++
+                    console.log(i)
+                    $("#like-btn").text(`${i} likes`)
+
+                })
+            
+
+            function listContacts() {
+                console.log("start of listing contacts");
+
+
+                var settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://"+ myDB +".restdb.io/rest/" + myCollection +"",
+                    "method": "GET",
+                    "headers": {
+                    "content-type": "application/json",
+                    "x-apikey": apiKey,
+                    "cache-control": "no-cache"
+                    }
+                }
+
+                $.ajax(settings).done(function (data) {
+                    console.log("successfully log into db");
+                    console.log(data);
+                    var numContacts = data.length;
+                    console.log("number of contacts" + numContacts);
+                    $("#num-contacts").html(numContacts);
+                    //do a jquery loop of json objects based on their keys(indexes)
+                    $.each(data, function (key, value) {
+                        console.log(key + "value");
+                        console.log("Name" + data[key].name);
+                        console.log("title" + data[key].title);
+                        console.log("qns" + data[key].qns);
+                        console.log("id" + data[key]._id);
+                        var contactDocument = {
+                            name: data[key].name,
+                            title: data[key].title,
+                            qns: data[key].qns,
+                            id: data[key]._id
+                        }
+                
+
+                        $("#msg-board").append(
+                            //`<tr data-row="${contactDocument.id}"><td>${contactDocument.id}</td><td>${contactDocument.name}</td><td>${contactDocument.title}</td><td>${contactDocument.qns}</td>
+                            //<td><a href="x" class="btn btn-danger delete" id="delete-${contactDocument.id}" data-id="${contactDocument.id}">Delete</a>
+                            //<button class="btn btn-info edit" id="edit-${contactDocument.id}" data-id="${contactDocument.id}">Edit</button></td></tr>
+                            //`
+                            `<section id="msg">
+                             <h3>${contactDocument.name}</h3>
+                             <h4>${contactDocument.qns}</h4>
+                             <a href="x" class="btn btn-danger delete" id="delete-${contactDocument.id}" data-id="${contactDocument.id}">Delete</a>
+
+                             </section>
+                    
+                            
+          
+                             
+                             `
+                        );
+                    }); //end each loop
+
+                });
+
+            } //end listContacts
+
+            listContacts();
+
+           
+
+          
+        }); //end doc ready
+
+        var apiKey = "5e284c034327326cf1c91aba";
+      var myDB = "destination-298c";
+      var myCollection = "destination";
+
+      //create listener for submit
+      var contact = {
+        name: "",
+        title: "",
+        qns: ""
+      }
+
+      $("#contact-form").submit(function (e) {
+        console.log("submitting form details");
+        event.preventDefault();
+
+        //retrieve form values
+        contact.name = $("#user-name").val();
+        contact.title = $("#qns-title").val();
+        contact.qns = $("#user-question").val();
+
+        //set contact format json data
+        let contactDocument = {
+          name: contact.name,
+          title: contact.title,
+          qns: contact.qns,
+          
+        };
+        
+        var settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "https://"+ myDB +".restdb.io/rest/" + myCollection +"",
+          "method": "POST",
+          "headers": {
+            "content-type": "application/json",
+            "x-apikey": apiKey,
+            "cache-control": "no-cache"
+          },
+          "processData": false,
+          "data": JSON.stringify(contactDocument)
+        }
+
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+       
+      
+      });
+    </script>
+</body>
+
+</html>

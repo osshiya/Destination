@@ -1,0 +1,126 @@
+.banner {display:none}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0}
+
+body, p, h1, h2, h3, h4, h5 ,button, input, a, label, select, .but{
+    font-family: 'Lemonada', cursive!important;
+}
+
+.head {
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+            display: block;
+            height: auto;
+            }
+
+.shadowfilter {
+	-webkit-filter: drop-shadow(0px 0px 8px rgba(194, 249, 255, 0.8));
+	-webkit-transition: all 0.5s linear;
+	-o-transition: all 0.5s linear;
+	transition: all 0.5s linear;	
+}
+.shadowfilter:hover {
+	-webkit-filter: drop-shadow(0px 0px 12px rgba(0, 231, 255, 0.8));
+}
+
+.bgshadow{
+    -webkit-filter: drop-shadow(0px 12px 0px rgba(65, 65, 65, 0.8));
+}
+
+#sideFill {
+    background: url("images/leaf.gif");
+    background-size: contain;
+  height: 700px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+ .nav-link{
+border-color: rgb(81, 148, 175)!important;
+border-width: 5px!important;
+border-left-style: solid;
+margin: 20px!important;
+color: rgb(241, 243, 243)!important;
+}
+
+.nav-link:hover{
+border-color: rgb(196, 230, 243)!important;
+color: rgb(188, 223, 214)!important;
+}
+
+.nav-link:active{
+    border-color: rgb(237, 255, 137)!important;
+color: rgb(209, 223, 228)!important;
+}
+
+.active{
+    border-color: rgb(237, 255, 137)!important;
+color: rgb(239, 252, 191)!important;
+}
+
+.arr{
+    color: rgb(225, 239, 245);
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 30px;
+    border-radius: 20px;
+}
+
+.arr:hover{
+    color: skyblue;
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 30px;
+    border-radius: 20px;
+    background-color: rgba(70, 131, 180, 0.301);
+}
+
+.toSection{
+    color: rgb(72, 109, 131);
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 20px;
+    border-radius: 20px;
+}
+
+.toSection:hover{
+    color: rgb(239, 250, 255);
+    font-size: 20px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 20px;
+    border-radius: 20px;
+    background-color: rgba(104, 159, 204, 0.301);
+}
+
+.text-focus-in {
+	-webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.card-body, .cardB{
+    color: rgb(227, 236, 243);
+    background-color: rgb(151, 69, 69);
+}
+    
+.cardB h4 ,.cardB p{
+        padding: 30px;
+        text-align: center;
+        vertical-align: middle;
+}
+    
+.cardB:hover{
+    color: rgb(243, 243, 243);
+    background-color: indianred;
+}
+    
+a:hover{
+        text-decoration: none!important;
+}
+
+    
