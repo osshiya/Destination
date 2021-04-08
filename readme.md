@@ -6,6 +6,9 @@
 
 By Phimwipha, Shi Ya, Siang Lin
 
+- [GitHub](https://github.com/osshiya/Destination.git)
+- [GitHub Pages](https://osshiya.github.io/Destination/)
+
 ## ─
 
 ## Introduction
