@@ -348,7 +348,8 @@ function initialize() {
     url: "https://cors-anywhere.herokuapp.com/http://datamall2.mytransport.sg/ltaodataservice/BusRoutes?" + paramsArr,
     
     headers: { 'AccountKey' : 'jYPJun3ORe2iZ18XLuN2zw==',
-        'accept' : 'application/json'}, 
+        'accept' : 'application/json',
+	'X-Requested-With': 'XMLHttpRequest'}, 
               
         data: {}, 
    
@@ -419,7 +420,8 @@ for (var i=0; i < BSparams.length; i++){
 //https://cors-anywhere.herokuapp.com/
     url: "https://cors-anywhere.herokuapp.com/http://datamall2.mytransport.sg/ltaodataservice/BusStop?" + BSparamsArr, 
     headers: { 'AccountKey' : 'jYPJun3ORe2iZ18XLuN2zw==',
-        'accept' : 'application/json'}, 
+        'accept' : 'application/json',
+	'X-Requested-With': 'XMLHttpRequest'}, 
 
         Rdata: {},
     // crossDomain: true,
@@ -484,7 +486,8 @@ for (var i=0; i < params.length; i++){
     url: "https://cors-anywhere.herokuapp.com/http://datamall2.mytransport.sg/ltaodataservice/BusRoutes?" + paramsArr,
     
     headers: { 'AccountKey' : 'jYPJun3ORe2iZ18XLuN2zw==',
-        'accept' : 'application/json'}, 
+        'accept' : 'application/json',
+	 'X-Requested-With': 'XMLHttpRequest'}, 
               
         data: {}, 
    
